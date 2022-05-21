@@ -1,0 +1,37 @@
+// 指定当前proto版本
+syntax = "proto3";
+
+// 定义生成的地址
+option go_package = "./service";
+
+// 定义属于哪个包
+package service;
+
+
+message User{
+  string username = 1;
+  int32 age = 2;
+  string password = 3;
+  // repeated说明这是个string数组
+  repeated string addresses = 4;
+}
+
+
+
+message PersonInfo{
+  // 自定义类型
+  message Person{
+    string name = 1;
+    int32 age = 2;
+    string address = 3;
+  }
+  // 说明这是一个Person类型的数组
+  repeated Person info = 1;
+}
+
+message Student{
+  // 使用PersonInfo内部定义的Person类型
+  PersonInfo.Person base_info = 1;
+  int32 score = 2;
+}
+

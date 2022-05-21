@@ -1,0 +1,26 @@
+// 指定当前proto版本
+syntax = "proto3";
+
+// 定义生成的地址
+option go_package = "./service";
+import "user.proto";
+// 定义属于哪个包
+package service;
+
+// request
+message ProductRequest{
+  int32 prod_id = 1;
+  User user = 2;
+}
+
+// response
+message ProductResponse{
+  int32 prod_stock = 1;
+  int32 age = 2;
+  string  message = 3;
+}
+
+service ProdService{
+  // 定义方法
+  rpc GetProductStock(ProductRequest) returns (ProductResponse);
+}
