@@ -10,7 +10,7 @@ import (
 )
 
 func main(){
-	conn, err := grpc.Dial(":8000", grpc.WithTransportCredentials(insecure.NewCredentials()))
+	conn, err := grpc.Dial(":8001", grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil{
 		log.Fatalln("服务端出错或者未启动")
 	}
