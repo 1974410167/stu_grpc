@@ -1,3 +1,4 @@
 # stu_grpc
 
-### 学习grpc
+1. 学习Grpc
+2. 学习Nacos(代码主要在main.go)
