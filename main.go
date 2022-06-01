@@ -83,7 +83,21 @@ func main(){
 		Metadata:    map[string]string{"idc":"shanghai"},
 	})
 	HandlerError(err)
-	fmt.Println("服务注册:", success)
+	fmt.Println("服务注册1:", success)
+
+	success, err = namingClient.RegisterInstance(vo.RegisterInstanceParam{
+		Ip:          "127.0.0.1",   // grpc服务IP
+		Port:        8001,          // grpc服务端口
+		ServiceName: "demo2.go",   // 给grpc服务起个名字
+		Weight:      10,
+		Enable:      true,
+		Healthy:     true,
+		Ephemeral:   true,
+		Metadata:    map[string]string{"idc":"shanghai"},
+	})
+	HandlerError(err)
+	fmt.Println("服务注册2:", success)
+
 	// 获取服务信息
 	services, err := namingClient.GetService(vo.GetServiceParam{
 		ServiceName: "demo1.go",
@@ -103,7 +117,24 @@ func main(){
 		ServiceName: "demo1.go",
 	})
 	HandlerError(err)
-	fmt.Println("随机获取一个实例：", instance)
+	fmt.Println("随机获取一个实例1：", instance)
+	// 随机获取一个实例
+	instance1, err := namingClient.SelectOneHealthyInstance(vo.SelectOneHealthInstanceParam{
+		ServiceName: "demo2.go",
+	})
+	HandlerError(err)
+	fmt.Println("随机获取一个实例2：", instance1)
+	fmt.Println("实例地址:", instance1.Ip)
+	fmt.Println("实例端口:", instance1.Port)
+	fmt.Println("实例名字:", instance1.ServiceName)
+
+	// 获取服务列表
+	serviceInfos, err := namingClient.GetAllServicesInfo(vo.GetAllServiceInfoParam{
+		NameSpace: "",
+		PageNo:   1,
+		PageSize: 10,
+	})
+	fmt.Println("serviceInfos:", serviceInfos)
 }
 
 func HandlerError(v any){
