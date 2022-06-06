@@ -1,0 +1,24 @@
+// 指定当前proto版本
+syntax = "proto3";
+
+// 定义生成的地址
+option go_package = "./service";
+
+// 定义属于哪个包
+package service;
+
+import "user.proto";
+
+
+message Manager{
+  string username = 1;
+}
+
+message ManageRequest{
+  string username = 1;
+}
+
+service ManageService{
+  // 定义方法
+  rpc GetUserMessage(ManageRequest) returns (User);
+}

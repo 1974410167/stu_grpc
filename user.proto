@@ -16,8 +16,6 @@ message User{
   repeated string addresses = 4;
 }
 
-
-
 message PersonInfo{
   // 自定义类型
   message Person{
@@ -35,3 +33,12 @@ message Student{
   int32 score = 2;
 }
 
+message UserRequest{
+  string username = 1;
+}
+
+service UserServer{
+  // 定义方法
+  rpc GetUserMessage(UserRequest) returns (User);
+  rpc AddUserMessage(User) returns (User);
+}

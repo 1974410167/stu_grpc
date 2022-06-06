@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
-	"grpc/service"
 	"log"
+	"s_grpc/service"
 )
 
 func main(){

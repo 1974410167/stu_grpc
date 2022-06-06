@@ -12,10 +12,8 @@ import (
 
 func main(){
 	rpcServer := grpc.NewServer()
-
-	service.RegisterProdServiceServer(rpcServer, service.ProductService)
-
-	listener, err := net.Listen("tcp", ":8001")
+	service.RegisterManageServiceServer(rpcServer, service.ManagerServiceIns)
+	listener, err := net.Listen("tcp", ":8003")
 	if err != nil{
 		log.Fatal("启动监听出错", err)
 	}

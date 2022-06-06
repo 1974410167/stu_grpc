@@ -3,9 +3,9 @@ package main
 import (
 	"fmt"
 	"google.golang.org/grpc"
-	"grpc/service"
 	"log"
 	"net"
+	"s_grpc/service"
 )
 
 

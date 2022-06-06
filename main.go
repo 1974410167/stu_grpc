@@ -74,8 +74,8 @@ func main(){
 	// 服务注册
 	success, err = namingClient.RegisterInstance(vo.RegisterInstanceParam{
 		Ip:          "127.0.0.1",   // grpc服务IP
-		Port:        8000,          // grpc服务端口
-		ServiceName: "demo1.go",   // 给grpc服务起个名字
+		Port:        8003,          // grpc服务端口
+		ServiceName: "manager_server",   // 给grpc服务起个名字
 		Weight:      10,
 		Enable:      true,
 		Healthy:     true,
@@ -87,8 +87,8 @@ func main(){
 
 	success, err = namingClient.RegisterInstance(vo.RegisterInstanceParam{
 		Ip:          "127.0.0.1",   // grpc服务IP
-		Port:        8001,          // grpc服务端口
-		ServiceName: "demo2.go",   // 给grpc服务起个名字
+		Port:        8002,          // grpc服务端口
+		ServiceName: "user_server",   // 给grpc服务起个名字
 		Weight:      10,
 		Enable:      true,
 		Healthy:     true,
@@ -100,27 +100,27 @@ func main(){
 
 	// 获取服务信息
 	services, err := namingClient.GetService(vo.GetServiceParam{
-		ServiceName: "demo1.go",
+		ServiceName: "user_server",
 	})
 	HandlerError(err)
 	fmt.Println("hosts:", services.Hosts)
 	fmt.Println("name:", services.Name)
 	fmt.Println("clusters:", services.Clusters)
-	// 获取服务的实例列表
-	instances, err := namingClient.SelectAllInstances(vo.SelectAllInstancesParam{
-		ServiceName: "demo1.go",
-	})
-	HandlerError(err)
-	fmt.Println("instance:", instances)
-	// 随机获取一个实例
-	instance, err := namingClient.SelectOneHealthyInstance(vo.SelectOneHealthInstanceParam{
-		ServiceName: "demo1.go",
-	})
-	HandlerError(err)
-	fmt.Println("随机获取一个实例1：", instance)
+	//// 获取服务的实例列表
+	//instances, err := namingClient.SelectAllInstances(vo.SelectAllInstancesParam{
+	//	ServiceName: "user_server",
+	//})
+	//HandlerError(err)
+	//fmt.Println("instance:", instances)
+	//// 随机获取一个实例
+	//instance, err := namingClient.SelectOneHealthyInstance(vo.SelectOneHealthInstanceParam{
+	//	ServiceName: "user_server",
+	//})
+	//HandlerError(err)
+	//fmt.Println("随机获取一个实例1：", instance)
 	// 随机获取一个实例
 	instance1, err := namingClient.SelectOneHealthyInstance(vo.SelectOneHealthInstanceParam{
-		ServiceName: "demo2.go",
+		ServiceName: "user_server",
 	})
 	HandlerError(err)
 	fmt.Println("随机获取一个实例2：", instance1)
