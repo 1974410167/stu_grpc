@@ -11,7 +11,7 @@
 
 1. user_server.go提供了GetUserMessage和AddUserMessage两个方法
 2. manage_server.go也提供了GetUserMessage方法
-3. manage_server.go的GetUserMessage内部调用user_server.go的GetUserMessage。
+3. manage_server.go的GetUserMessage内部调用user_server.go的GetUserMessage。(具体代码在https://github.com/1974410167/stu_grpc/blob/main/service/manage.go)
 4. 编写manager_client.go来调用manage_server.go的GetUserMessage
 
 ### Nacos安装与基本操作
