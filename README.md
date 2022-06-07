@@ -3,6 +3,16 @@
 1. 学习Grpc
 2. 学习Nacos(代码主要在main.go)
 
+### 实现两个服务的互相调用
+
+一个服务A内部调用另一个服务B,然后客户端C来请求A。
+
+#### 此demo的实现
+
+1. user_server.go提供了GetUserMessage和AddUserMessage两个方法
+2. manage_server.go也提供了GetUserMessage方法
+3. manage_server.go的GetUserMessage内部调用user_server.go的GetUserMessage。
+4. 编写manager_client.go来调用manage_server.go的GetUserMessage
 
 ### Nacos安装与基本操作
 1. 仿照教程https://nacos.io/zh-cn/docs/quick-start.html  下载解压
