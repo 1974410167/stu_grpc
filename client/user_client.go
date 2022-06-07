@@ -36,7 +36,14 @@ func main(){
 	if err != nil{
 		log.Fatalln(err)
 	}
+	fmt.Println("插入的name和age：")
 	fmt.Println("name:", res.Username)
 	fmt.Println("age:", res.Age)
-
+	q := &service.UserRequest{
+		Username: "kebi",
+	}
+	res1, err := userClient.GetUserMessage(context.Background(),q)
+	fmt.Println("得到的name和age：")
+	fmt.Println("name:", res1.Username)
+	fmt.Println("age:", res1.Age)
 }

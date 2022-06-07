@@ -28,6 +28,7 @@ func main(){
 	if err != nil{
 		log.Fatalln(err)
 	}
+	fmt.Println("调用成功")
 	fmt.Println("name:", res.Username)
 	fmt.Println("age:", res.Age)
 

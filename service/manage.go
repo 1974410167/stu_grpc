@@ -7,6 +7,7 @@ import (
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
 	"log"
+	"strconv"
 )
 
 
@@ -29,14 +30,17 @@ func (m *ManagerService) GetUserMessage(c context.Context,request *ManageRequest
 	HandlerError(err)
 	// 从服务发现客户端根据服务名得到一个实例
 	instance1, err := q.SelectOneHealthyInstance(vo.SelectOneHealthInstanceParam{
-		ServiceName: "user_server.go",
+		ServiceName: "user_server",
 	})
 	if err != nil{
-		fmt.Println(err)
+		log.Fatalln("没有获取到实例")
+		return nil, err
 	}
 	ip := instance1.Ip
 	port := instance1.Port
-	tar := ip + ":" + string(port)
+	fmt.Println("port", port)
+	tar := ip + ":" + strconv.Itoa(int(port))
+	fmt.Println(tar)
 	// 连接实例，获取实例句柄
 	conn, err := grpc.Dial(tar, grpc.WithTransportCredentials(insecure.NewCredentials()))
 	if err != nil{
@@ -51,7 +55,7 @@ func (m *ManagerService) GetUserMessage(c context.Context,request *ManageRequest
 	// 根据用户客户端调用客户方法
 	res, err := userClient.GetUserMessage(context.Background(), t)
 	if err != nil{
-		log.Fatalln("MangerServer调用UserServer出错来查询用户信息出错")
+		log.Fatalln("MangerServer调用UserServer出错111")
 	}
 	return res, nil
 }
